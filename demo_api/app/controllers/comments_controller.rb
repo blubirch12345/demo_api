@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 	before_action :authenticate_user!
-	
+
 	def index
 		@comments = Comment.all
 		render json: @comments
@@ -15,8 +15,16 @@ class CommentsController < ApplicationController
 		end
 	end
 
+	def update
+	end
+
+	def destroy
+		@comment.destroy
+		render json: @comments
+	end
+
 	private
 	def comment_params
-		params.require(:comment).permit(:commenter, :comment)
+		params.require(:comment).permit(:user_id, :post_id, :commenter, :comment)
 	end
 end
